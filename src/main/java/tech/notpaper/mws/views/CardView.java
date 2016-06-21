@@ -1,4 +1,4 @@
-package tech.notpaper.mws;
+package tech.notpaper.mws.views;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,13 +11,18 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.server.JSONP;
 
-@Path("identifycard")
-public class IdentifyCard {
+import tech.notpaper.mws.controllers.CardController;
+import tech.notpaper.mws.models.Card;
+
+@Path("card")
+public class CardView {
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent
@@ -28,13 +33,11 @@ public class IdentifyCard {
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public String identifyCard(@FormDataParam("file") InputStream stream) throws IOException {
-    	byte[] image = IOUtils.toByteArray(stream);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String getCard(InputStream json) throws IOException {
+    	Card card = CardController.handle(json);
     	
-    	FileUtils.writeByteArrayToFile(new File("uploadedimage.jpg"), image);
-    	
-        return "{\nimage: " + new File(".").getAbsolutePath() + "/uploadimage.jpg\n}";
+    	return card.toString();
     }
     
     @GET

@@ -21,7 +21,7 @@ public class Card implements Serializable {
 	 */
 	private static final long serialVersionUID = -5321301334609084938L;
 	
-	private static final String host = "localhost";
+	private static final String host = "ec2-52-33-187-74.us-west-2.compute.amazonaws.com";
 	private static final String user = "mwsuser";
 	private static final String pass = "pegasys11";
 	private static final String db = "mws";
@@ -45,7 +45,7 @@ public class Card implements Serializable {
 			where.append(" and ");
 		}
 		
-		where.append(prop + "=" + value);
+		where.append(prop + " = '" + value + "'");
 		
 		return this;
 	}
@@ -57,7 +57,7 @@ public class Card implements Serializable {
 			where.append(" and ");
 		}
 		
-		where.append(prop + "like" + value);
+		where.append(prop + "like '" + value + "'");
 		
 		return this;
 	}
@@ -88,8 +88,7 @@ public class Card implements Serializable {
 			
 			result.put("cards", cards);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException("Failed to load card(s).", e);
 		}
 		
 		return result.toString();

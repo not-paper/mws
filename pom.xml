@@ -79,6 +79,11 @@
         	<artifactId>data-import</artifactId>
         	<version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+        	<groupId>javax.interceptor</groupId>
+        	<artifactId>javax.interceptor-api</artifactId>
+        	<version>1.2</version>
+        </dependency>
     </dependencies>
     <properties>
         <jersey.version>2.23</jersey.version>

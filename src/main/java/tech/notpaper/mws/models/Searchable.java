@@ -76,7 +76,7 @@ public abstract class Searchable implements Serializable {
 
 			Connection c;
 			data = new JSONObject();
-
+			
 			try {
 				c = cm.getConnection();
 				Statement s = c.createStatement();
